@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Room</title>
+    <!--CSS Links-->
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="style/mobile.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+
+
+</head>
+<body>
+
+<div id="appointmentPage" data-role="page" data-dom-cache="true"></div>
+
+
+<!--<div class="toolbar">-->
+<!--<button class="left toolbar__left">-->
+<!--<i class="zmdi zmdi-menu p-r"></i>-->
+<!--</button>-->
+<!--<span class="center toolbar__center toolbar__title">-->
+<!--SERPENTIX-->
+<!--</span>-->
+<!--<button class="right toolbar__right p-r">-->
+<!--<a href="new-job.html" class="style-no-underline">Add</a>-->
+<!--</button>-->
+<!--</div>-->
+
+<!--<div data-role="dialog" id="infoDialog" data-close-btn="none">-->
+<!--<div data-role="header">-->
+<!--<h1 id="infoDialogHeader"></h1>-->
+<!--</div>-->
+<!--<div data-role="content" id="infoDialogContent"></div>-->
+<!--<div class="cssInfoDialogButtons" data-role="footer"></div>-->
+<!--<a href="javascript:void(0);" data-rel="back" data-role="button">Ok</a>-->
+<!--</div>-->
+
+
+<!--Footer section-->
+<div class="tabbar tabbar--bottom tabbar--top-border">
+    <label class="tabbar__item tabbar--top-border__item">
+        <button class="tabbar__button tabbar--top-border__button selected">
+            <a href="index.html" class="style-no-underline" data-prefetch="true">Home</a>
+        </button>
+    </label>
+
+    <label class="tabbar__item tabbar--top-border__item">
+        <button class="tabbar__button tabbar--top-border__button">
+            <a href="new-job.html" class="style-no-underline" data-prefetch="true">Update Jobs</a>
+        </button>
+    </label>
+
+    <label class="tabbar__item tabbar--top-border__item">
+        <button class="tabbar__button tabbar--top-border__button">
+            <a href="Appointment.html" class="style-no-underline" data-prefetch="true">Appointments</a>
+        </button>
+    </label>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="script/mobile.js"></script>
+<script type="text/javascript" src="script/homeScript.js"></script>
+<script>
+    $(document).delegate("#appointmentPage", "pageshow", function(inEvent){
+        pageShowHandler("appointment");
+    });
+</script>
+</html>
