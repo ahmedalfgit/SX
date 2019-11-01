@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Room</title>
+    <!--CSS Links-->
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="style/mobile.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+
+
+</head>
+<body>
+<div class="toolbar">
+    <button class="left toolbar__left">
+        <i class="zmdi zmdi-menu p-r"></i>
+    </button>
+    <span class="center toolbar__center toolbar__title">
+                SERPENTIX
+            </span>
+    <button class="right toolbar__right p-r" id="addButton">
+        Add
+    </button>
+</div>
+
+<div id="newJobFormDiv">
+    <form class="newJobForm" id="newJobForm" method="post">
+        <input type="text" class="jobInput" id="jobName" placeholder="Job name...">
+        <input type="text" class="jobInput" id="jobId" placeholder="Job id...">
+        <input type="text" class="jobInput" id="jobDesigner" placeholder="Designer...">
+        <label for="jobStartDate" class="dateLabels">Start Date</label>
+        <input type="date" class="jobInput dateInput" id="jobStartDate" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31">
+        <label for="jobDueDate">Due Date</label>
+        <input type="date" class="jobInput dateInput" id="jobDueDate" name="trip-start" value="2020-07-22" min="2018-01-01" max="2018-12-31">
+        <label for="category">Category</label>
+        <select name="Category" id="category" class="categorySelect">
+            <option value="Conveyor">Conveyor</option>
+            <option value="Fabrication">Fabrication</option>
+            <option value="Automation">Automation</option>
+        </select>
+
+
+        <div class="center">
+            <p class="processTitle">Job Process</p>
+            <ul class="list" id="processList">
+                <li class="list-item list-item--tappable">
+                    <div class="list-item__left">
+                        <label class="checkbox">
+                            <input type="checkbox" id="design" class="checkbox__input" name="design" checked="checked">
+                            <div class="checkbox__checkmark"></div>
+                        </label>
+                    </div>
+                    <label for="design" class="list-item__center">
+                        Design
+                    </label>
+                </li>
+                <li class="list-item list-item--tappable">
+                    <div class="list-item__left">
+                        <label class="checkbox">
+                            <input type="checkbox" id="metalCut" class="checkbox__input" name="laser">
+                            <div class="checkbox__checkmark"></div>
+                        </label>
+                    </div>
+                    <label for="metalCut" class="list-item__center">
+                        Laser
+                    </label>
+                </li>
+                <li class="list-item list-item--tappable">
+                    <div class="list-item__left">
+                        <label class="checkbox">
+                            <input type="checkbox" id="metalBending" class="checkbox__input" name="bend">
+                            <div class="checkbox__checkmark"></div>
+                        </label>
+                    </div>
+                    <label for="metalBending" class="list-item__center">
+                        Press Brake
+                    </label>
+                </li>
+                <li class="list-item list-item--tappable">
+                    <div class="list-item__left">
+                        <label class="checkbox">
+                            <input type="checkbox" id="welding" class="checkbox__input" name="weld">
+                            <div class="checkbox__checkmark"></div>
+                        </label>
+                    </div>
+                    <label for="welding" class="list-item__center">
+                        Weld
+                    </label>
+                </li>
+                <li class="list-item list-item--tappable">
+                    <div class="list-item__left">
+                        <label class="checkbox">
+                            <input type="checkbox" id="metalFinishing" class="checkbox__input" name="metalFinish">
+                            <div class="checkbox__checkmark"></div>
+                        </label>
+                    </div>
+                    <label for="metalFinishing" class="list-item__center">
+                        Metal finish
+                    </label>
+                </li>
+                <li class="list-item list-item--tappable">
+                    <div class="list-item__left">
+                        <label class="checkbox">
+                            <input type="checkbox" id="assembly" class="checkbox__input" name="assembly">
+                            <div class="checkbox__checkmark"></div>
+                        </label>
+                    </div>
+                    <label for="assembly" class="list-item__center">
+                        Assembly
+                    </label>
+                </li>
+            </ul>
+        </div>
+        <div id="form_id"></div>
+        <input class="button--large--cta" style="width: 95%; margin: 0 auto;" type="submit" value="Submit" id="submitJob" onclick="submitForm()">
+    </form>
+</div>
+
+<div class="container pr-0 pl-0 pt-xs-4 pb-xs-5">
+    <div id="pieChart" width="400" height="400" class="row"></div>
+    <ul class="row">
+        <li class="col-sm-12 list-style-none">
+            <div id="jobNameDiv" class="job-info-sec"></div>
+        </li>
+        <li class="col-sm-12 list-style-none">
+            <div id="jobIdDiv" class="job-info-sec"></div>
+        </li>
+        <li class="col-sm-12 list-style-none">
+            <div id="jobDesignerDiv" class="job-info-sec"></div>
+        </li>
+        <li class="col-sm-12 list-style-none">
+            <div id="jobDueDateDiv" class="job-info-sec"></div>
+        </li>
+        <li class="col-sm-12 list-style-none">
+            <div id="jobCategoryDiv" class="job-info-sec"></div>
+        </li>
+    </ul>
+</div>
+
+<!--Footer section-->
+<div class="tabbar tabbar--bottom tabbar--top-border">
+    <label class="tabbar__item tabbar--top-border__item">
+        <button class="tabbar__button tabbar--top-border__button">
+            <a href="index.html" class="style-no-underline" data-prefetch="true">Home</a>
+        </button>
+    </label>
+
+    <label class="tabbar__item tabbar--top-border__item">
+        <button class="tabbar__button tabbar--top-border__button selected">
+            <a href="new-job.html" class="style-no-underline" data-prefetch="true">Update Jobs</a>
+        </button>
+    </label>
+
+    <label class="tabbar__item tabbar--top-border__item">
+        <button class="tabbar__button tabbar--top-border__button">
+            <a href="appointment.html" class="style-no-underline" data-prefetch="true">Appointments</a>
+        </button>
+    </label>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>-->
+<script type="text/javascript" src="script/project.js"></script>
+</html>
