@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Room</title>
+    <!--CSS Links-->
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="style/mobile.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+
+
+</head>
+<body>
+<div class="toolbar">
+    <button class="left toolbar__left">
+        <i class="zmdi zmdi-menu p-r"></i>
+    </button>
+    <span class="center toolbar__center toolbar__title">
+                SERPENTIX
+            </span>
+    <button class="right toolbar__right p-r" id="addButton" onclick="showForm()">
+        Add
+    </button>
+</div>
+
+<div id="newAppointmentFormDiv">
+    <form class="newAppointmentForm pt-xs-3" id="newAppointmentForm" method="post">
+        <input type="text" class="AppointmentInput" id="appointmentTitle" placeholder="Title">
+        <label for="appointmentDate" class="dateLabels">Date</label>
+        <input type="date" class="appointmentInput dateInput" id="appointmentDate" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31">
+        <label for="startTime" class="timeStartFrom">From</label>
+        <select name="startTimeHour" id="startTime" class="timeSelect l-22-p mb-xs-3">
+            <option>Hour</option>
+            <option value="01">1</option>
+            <option value="02">2</option>
+            <option value="03">3</option>
+            <option value="04">4</option>
+            <option value="05">5</option>
+            <option value="06">6</option>
+            <option value="07">7</option>
+            <option value="08">8</option>
+            <option value="09">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+        </select>
+        <select name="startTimeMeridiem" id="startTimeMeridiem" class="timeSelect l-22-p">
+            <option>Meridiem</option>
+            <option value="am">AM</option>
+            <option value="pm">PM</option>
+        </select>
+        <label for="endTime" class="timeEndTo">To</label>
+        <select name="endTimeHour" id="endTime" class="timeSelect l-22-p mb-xs-3">
+            <option>Hour</option>
+            <option value="01">1</option>
+            <option value="02">2</option>
+            <option value="03">3</option>
+            <option value="04">4</option>
+            <option value="05">5</option>
+            <option value="06">6</option>
+            <option value="07">7</option>
+            <option value="08">8</option>
+            <option value="09">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+        </select>
+        <select name="endTimeMeridiem" id="endTimeMeridiem" class="timeSelect l-22-p">
+            <option>Meridiem</option>
+            <option value="am">AM</option>
+            <option value="pm">PM</option>
+        </select>
+        <label for="room" class="roomSelection">Room</label>
+        <select name="Room" id="room" class="roomSelect l-22-p">
+            <option value="Aspen">Aspen</option>
+            <option value="Vale">Vale</option>
+            <option value="Steamboat">Steamboat</option>
+        </select>
+        <div id="form_id"></div>
+        <input class="mt-xs-4 button--large--cta" style="width: 95%; margin: 0 auto;" type="submit" value="Submit" id="submitJob" onclick="storeData()">
+    </form>
+</div>
+
+<div id="table_div" class="pt-xs-4"></div>
+
+<!--Footer section-->
+<div class="tabbar tabbar--bottom tabbar--top-border">
+    <label class="tabbar__item tabbar--top-border__item">
+        <button class="tabbar__button tabbar--top-border__button">
+            <a href="index.html" class="style-no-underline" data-prefetch="true">Home</a>
+        </button>
+    </label>
+
+    <label class="tabbar__item tabbar--top-border__item">
+        <button class="tabbar__button tabbar--top-border__button">
+            <a href="new-job.html" class="style-no-underline" data-prefetch="true">Update Jobs</a>
+        </button>
+    </label>
+
+    <label class="tabbar__item tabbar--top-border__item">
+        <button class="tabbar__button tabbar--top-border__button selected">
+            <a href="appointment.html" class="style-no-underline" data-prefetch="true">Appointments</a>
+        </button>
+    </label>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>-->
+<script type="text/javascript" src="script/A.js"></script>
+</html>
