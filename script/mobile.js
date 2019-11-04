@@ -1,7 +1,7 @@
 
 // Set the date for the input of the new job form
-// let today = new Date().toISOString().substr(0, 10);
-// document.querySelector("#jobStartDate").value = today;
+let today = new Date().toISOString().substr(0, 10);
+document.querySelector("#appointmentStartDate").value = today;
 
 
 // function to show the form section when click on add and hide after submit form
@@ -74,7 +74,6 @@ function submitForm() {
         }
         return chartData.push(value);
     });
-
 
     if (validation()) // Calling validation function
     {
@@ -164,11 +163,4 @@ function drawChart() {
     chart.draw(data, options);
 }
 
-
-// function to draw chart using the data from chartData;
-function init() {
-    showForm();
-}
-
-window.addEventListener("load", init);
 
