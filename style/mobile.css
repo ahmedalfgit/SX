@@ -64,7 +64,7 @@
         box-shadow: none;
         padding: 5px 4px;
     }
-    .categorySelect, .locationSelect {
+    .categorySelect, .roomSelect, .timeSelect {
         display: inline-block;
         font-size: 15px;
         font-family: sans-serif;
@@ -88,6 +88,12 @@
         background-repeat: no-repeat, repeat;
         background-position: right .7em top 50%, 0 0;
         background-size: .65em auto, 100%;
+    }
+    .timeStartFrom, .timeEndTo, .roomSelection {
+        width: 42%;
+    }
+    .l-22-p {
+        left: 22%;
     }
     .select-css::-ms-expand {
         display: none;
