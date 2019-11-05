@@ -11,8 +11,10 @@ function showForm() {
     document.getElementById("newAppointmentFormDiv").style.display = "block";
 }
 
-function submitForm () {
-    return  inputData = {
+function submitForm() {
+    // if validation();
+    // add validation()
+    let  inputData = {
         meetingatitle: f("appointmentTitle"),
         meetingDate: f("appointmentDate"),
         startTime: f("startTime"),
@@ -20,11 +22,13 @@ function submitForm () {
         endTime: f("endTime"),
         endTimeMeridiem: f("endTimeMeridiem"),
         room: f("room")
-    }
+    };
+
+    storeData(inputData);
 }
 
-function storeData() {
-    window.localStorage.setItem('inputData', JSON.stringify(submitForm()));
+function storeData(inputData) {
+    window.localStorage.setItem('inputData', JSON.stringify(inputData));
     loadGoogleTable();
 }
 
