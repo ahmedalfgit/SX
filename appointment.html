@@ -27,52 +27,55 @@
 <div id="newAppointmentFormDiv">
     <form class="newAppointmentForm pt-xs-3" id="newAppointmentForm" method="post">
         <input type="text" class="AppointmentInput" id="appointmentTitle" placeholder="Title">
+        <div id="appointmentTitleError"></div>
         <label for="appointmentDate" class="dateLabels">Date</label>
         <input type="date" class="appointmentInput dateInput" id="appointmentDate" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31">
-        <label for="startTime" class="timeStartFrom">From</label>
-        <select name="startTimeHour" id="startTime" class="timeSelect l-22-p mb-xs-3">
+        <label for="appointmentStartTime" class="timeStartFrom">From</label>
+        <select name="startTimeHour" id="appointmentStartTime" class="timeSelect l-22-p mb-xs-3">
             <option>Hour</option>
-            <option value="01">1</option>
-            <option value="02">2</option>
-            <option value="03">3</option>
-            <option value="04">4</option>
-            <option value="05">5</option>
-            <option value="06">6</option>
-            <option value="07">7</option>
-            <option value="08">8</option>
-            <option value="09">9</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
             <option value="10">10</option>
             <option value="11">11</option>
             <option value="12">12</option>
         </select>
-        <select name="startTimeMeridiem" id="startTimeMeridiem" class="timeSelect l-22-p">
-            <option>Meridiem</option>
+        <select name="startTimeMeridian" id="appointmentStartTimeMeridian" class="timeSelect l-22-p">
+            <option>Meridian</option>
             <option value="am">AM</option>
             <option value="pm">PM</option>
         </select>
-        <label for="endTime" class="timeEndTo">To</label>
-        <select name="endTimeHour" id="endTime" class="timeSelect l-22-p mb-xs-3">
+        <div id="appointmentStartTimeError"></div>
+        <label for="appointmentEndTime" class="timeEndTo">To</label>
+        <select name="endTimeHour" id="appointmentEndTime" class="timeSelect l-22-p mb-xs-3">
             <option>Hour</option>
-            <option value="01">1</option>
-            <option value="02">2</option>
-            <option value="03">3</option>
-            <option value="04">4</option>
-            <option value="05">5</option>
-            <option value="06">6</option>
-            <option value="07">7</option>
-            <option value="08">8</option>
-            <option value="09">9</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
             <option value="10">10</option>
             <option value="11">11</option>
             <option value="12">12</option>
         </select>
-        <select name="endTimeMeridiem" id="endTimeMeridiem" class="timeSelect l-22-p">
-            <option>Meridiem</option>
+        <select name="endTimeMeridian" id="appointmentEndTimeMeridian" class="timeSelect l-22-p">
+            <option>Meridian</option>
             <option value="am">AM</option>
             <option value="pm">PM</option>
         </select>
-        <label for="room" class="roomSelection">Room</label>
-        <select name="Room" id="room" class="roomSelect l-22-p">
+        <div id="appointmentEndTimeErrorDiv"></div>
+        <label for="appointmentRoom" class="roomSelection">Room</label>
+        <select name="Room" id="appointmentRoom" class="roomSelect l-22-p">
             <option value="Aspen">Aspen</option>
             <option value="Vale">Vale</option>
             <option value="Steamboat">Steamboat</option>

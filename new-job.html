@@ -25,20 +25,27 @@
 </div>
 
 <div id="newJobFormDiv">
-    <form class="newJobForm" id="newJobForm" method="post">
-        <input type="text" class="jobInput" id="jobName" placeholder="Job name...">
-        <input type="text" class="jobInput" id="jobId" placeholder="Job id...">
-        <input type="text" class="jobInput" id="jobDesigner" placeholder="Designer...">
+    <form class="newJobForm" id="newJobForm" method="post" name="jobForm">
+        <input type="text" name="jobName" class="jobInput" id="jobName" placeholder="Job name...">
+        <div class="error" id="nameErr"></div>
+        <input type="text" name="jobId" class="jobInput" id="jobId" placeholder="Job id...">
+        <div class="error" id="idErr"></div>
+        <input type="text" name="jobDesigner" class="jobInput" id="jobDesigner" placeholder="Designer...">
+        <div class="error" id="jobDesignerErr"></div>
         <label for="jobStartDate" class="dateLabels">Start Date</label>
-        <input type="date" class="jobInput dateInput" id="jobStartDate" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31">
+        <input type="date" class="jobInput dateInput" id="jobStartDate" name="jobStart" value="2018-07-22" min="2018-01-01" max="2018-12-31">
+        <div class="error" id="jobStartErr"></div>
         <label for="jobDueDate">Due Date</label>
-        <input type="date" class="jobInput dateInput" id="jobDueDate" name="trip-start" value="2020-07-22" min="2018-01-01" max="2018-12-31">
+        <input type="date" class="jobInput dateInput" id="jobDueDate" name="jobDue" value="2020-07-22" min="2018-01-01" max="2018-12-31">
+        <div class="error" id="jobDueErr"></div>
         <label for="category">Category</label>
-        <select name="Category" id="category" class="categorySelect">
+        <select name="category" id="category" class="categorySelect">
+            <option value="Select">Select</option>
             <option value="Conveyor">Conveyor</option>
             <option value="Fabrication">Fabrication</option>
             <option value="Automation">Automation</option>
         </select>
+        <div class="error" id="categoryErr"></div>
 
 
         <div class="center">
@@ -47,7 +54,7 @@
                 <li class="list-item list-item--tappable">
                     <div class="list-item__left">
                         <label class="checkbox">
-                            <input type="checkbox" id="design" class="checkbox__input" name="design" checked="checked">
+                            <input type="checkbox" id="design" class="checkbox__input" name="process[]" checked="checked" value="design">
                             <div class="checkbox__checkmark"></div>
                         </label>
                     </div>
@@ -58,7 +65,7 @@
                 <li class="list-item list-item--tappable">
                     <div class="list-item__left">
                         <label class="checkbox">
-                            <input type="checkbox" id="metalCut" class="checkbox__input" name="laser">
+                            <input type="checkbox" id="metalCut" class="checkbox__input" name="process[]" value="laser">
                             <div class="checkbox__checkmark"></div>
                         </label>
                     </div>
@@ -69,7 +76,7 @@
                 <li class="list-item list-item--tappable">
                     <div class="list-item__left">
                         <label class="checkbox">
-                            <input type="checkbox" id="metalBending" class="checkbox__input" name="bend">
+                            <input type="checkbox" id="metalBending" class="checkbox__input" name="process[]" value="press brake">
                             <div class="checkbox__checkmark"></div>
                         </label>
                     </div>
@@ -80,7 +87,7 @@
                 <li class="list-item list-item--tappable">
                     <div class="list-item__left">
                         <label class="checkbox">
-                            <input type="checkbox" id="welding" class="checkbox__input" name="weld">
+                            <input type="checkbox" id="welding" class="checkbox__input" name="process[]" value="weld">
                             <div class="checkbox__checkmark"></div>
                         </label>
                     </div>
@@ -91,7 +98,7 @@
                 <li class="list-item list-item--tappable">
                     <div class="list-item__left">
                         <label class="checkbox">
-                            <input type="checkbox" id="metalFinishing" class="checkbox__input" name="metalFinish">
+                            <input type="checkbox" id="metalFinishing" class="checkbox__input" name="process[]" value="metalFinish">
                             <div class="checkbox__checkmark"></div>
                         </label>
                     </div>
@@ -102,7 +109,7 @@
                 <li class="list-item list-item--tappable">
                     <div class="list-item__left">
                         <label class="checkbox">
-                            <input type="checkbox" id="assembly" class="checkbox__input" name="assembly">
+                            <input type="checkbox" id="assembly" class="checkbox__input" name="process[]" value="assembly">
                             <div class="checkbox__checkmark"></div>
                         </label>
                     </div>
@@ -113,7 +120,7 @@
             </ul>
         </div>
         <div id="form_id"></div>
-        <input class="button--large--cta" style="width: 95%; margin: 0 auto;" type="submit" value="Submit" id="submitJob" onclick="submitForm()">
+        <input class="button--large--cta" style="width: 95%; margin: 0 auto;" type="button" value="Submit" id="submitJob" onclick="submitData()">
     </form>
 </div>
 

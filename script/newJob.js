@@ -1,62 +1,122 @@
 
-// Set the date for the input of the new job form
-let today = new Date().toISOString().substr(0, 10);
-document.querySelector("#appointmentStartDate").value = today;
-
-
-// function to show the form section when click on add and hide after submit form
-function showForm() {
-    document.getElementById("addButton").addEventListener("click", function (){
-        document.getElementById("newJobFormDiv").classList.add("showForm");
-
-    });
+// Defining a function to display error message
+function printError(elemId, msg) {
+    document.getElementById(elemId).innerHTML = msg;
 }
-function hideForm(){
-    document.getElementById("newJobFormDiv").classList.remove("showForm");
-    storeData();
-}
-
-function storeData() {
-    window.localStorage.setItem('chartData', JSON.stringify(chartData));
-    drawChart();
-}
-
-
-    // function to return the document.getElementById(id)
-var x = function(id) {
-    return document.getElementById(id).value;
-    };
-
-var form = new Object();
-var chartData = [];
-// Submit form with submitForm function.
-function submitForm() {
-    var jobName = x("jobName");
-    let jobTitle = document.getElementById("jobNameDiv");
-    jobTitle.innerHTML = "<img src=job.png id='img'>" + "<div class='px-xs-2'>Job Name: </div>" + jobName;
-    var jobId = x("jobId");
-    let jobIdDiv = document.getElementById("jobIdDiv");
-    jobIdDiv.innerHTML = "<img src=id.png id='img'>" + "<div class='px-xs-2'>Job Id: </div>" + jobId;
-    var jobDesigner = x("jobDesigner");
-    let jobDesinerDiv = document.getElementById("jobDesignerDiv");
-    jobDesinerDiv.innerHTML = "<img src=designer.png id='img'>" + "<div class='px-xs-2'>Designer: </div>" + jobDesigner;
-    var jobStartDate = x("jobStartDate");
-    var jobDueDate = x("jobDueDate");
-    let jobDueDateDiv = document.getElementById("jobDueDateDiv");
-    jobDueDateDiv.innerHTML = "<img src=due-date.png id='img'>" + "<div class='px-xs-2'>Job Due Date: </div>" + jobDueDate;
-    var category = x("category");
-    let categoryDiv = document.getElementById("jobCategoryDiv");
-    categoryDiv.innerHTML = "<img src=category.png id='img'>" + "<div class='px-xs-2'>Category: </div>" + category;
+function getFormData() {
+    // Retrieving the values of form elements
+    var jobName = document.jobForm.jobName.value;
+    var jobId = document.jobForm.jobId.value;
+    var jobDesigner = document.jobForm.jobDesigner.value;
+    var jobStart = document.jobForm.jobStart.value;
+    var jobDue = document.jobForm.jobDue.value;
+    var category = document.jobForm.category.value;
     var process = [];
-
-    // loop through the check boxed values and return the names of the boxes selected to the process array
-    var checkBoxes = document.querySelectorAll("#processList li input[type=checkbox]:checked");
-    for (let i = 0 ; i < checkBoxes.length; i++){
-        process.push(checkBoxes[i].name);
+    var checkboxes = document.getElementsByName("process[]");
+    for(var i=0; i < checkboxes.length; i++) {
+        if(checkboxes[i].checked) {
+            // Populate hobbies array with selected values
+            process.push(checkboxes[i].value);
+        }
     }
 
-    // If checkbox selected
-    process.forEach(function(element, value) {
+    // Defining error variables with a default value
+    var nameErr = jobDesignerErr = jobStartErr = jobDueErr = categoryErr =  true;
+
+    // Validate job name
+    if(jobName === "") {
+        printError("nameErr", "Please enter job name");
+    } else {
+        var regex = /^[a-zA-Z\s]+$/;
+        if(regex.test(jobName) === false) {
+            printError("nameErr", "Please enter a valid name");
+        } else {
+            printError("nameErr", "");
+            nameErr = false;
+        }
+    }
+
+    // Validate job Designer
+    if(jobDesigner === "") {
+        printError("jobDesignerErr", "Please enter your mobile number");
+    } else {
+        var regex = /^[a-zA-Z\s]+$/;
+        if(regex.test(jobDesigner) === false) {
+            printError("jobDesignerErr", "Please enter a valid 10 digit mobile number");
+        } else{
+            printError("jobDesignerErr", "");
+            jobDesignerErr = false;
+        }
+    }
+
+    // Validate job start date
+    if(jobStart === "") {
+        printError("jobStartErr", "Please enter your mobile number");
+    } else {
+        var regex = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
+        if(regex.test(jobStart) === false) {
+            printError("jobStartErr", "Please enter a valid 10 digit mobile number");
+        } else{
+            printError("jobStartErr", "");
+            jobStartErr = false;
+        }
+    }
+
+    // Validate job due date
+    if(jobDue === "") {
+        printError("jobDueErr", "Please enter your mobile number");
+    } else {
+        var regex = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
+        if(regex.test(jobDue) === false) {
+            printError("jobDueErr", "Please enter a valid 10 digit mobile number");
+        } else{
+            printError("jobDueErr", "");
+            jobDueErr = false;
+        }
+    }
+    // Validate category
+    if(category === "Select") {
+        alert("select category");
+        printError("categoryErr", "Please select the category");
+        return;
+    } else {
+        printError("categoryErr", "");
+        categoryErr = false;
+    }
+
+    var data = [];
+    // Prevent the form from being submitted if there are any errors
+    if((nameErr || idErr || jobDesignerErr || jobStartErr || jobDueErr || categoryErr ) === true) {
+        return false;
+    } else {
+        // Creating a string from input data for preview
+        data.push(jobName);
+        data.push(jobId);
+        data.push(jobDesigner);
+        data.push(jobStart);
+        data.push(jobDue);
+        data.push(category);
+        data.push(process);
+
+    }
+    return data;
+}
+
+chartData = [];
+
+function submitData() {
+    var allInputData = getFormData();
+    console.log(allInputData);
+    window.localStorage.setItem('allInputData', JSON.stringify(allInputData));
+
+    var allInputDataFromLocalStorage = JSON.parse(localStorage.getItem("allInputData"));
+    document.getElementById("jobNameDiv").innerHTML = "<img src=job.png id='img'>" + "<div class='px-xs-2'>Job Name: </div>" + allInputDataFromLocalStorage[0];
+    document.getElementById("jobIdDiv").innerHTML = "<img src=id.png id='img'>" + "<div class='px-xs-2'>Job Id: </div>" + allInputDataFromLocalStorage[1];
+    document.getElementById("jobDesignerDiv").innerHTML = "<img src=designer.png id='img'>" + "<div class='px-xs-2'>Job Designer: </div>" + allInputDataFromLocalStorage[2];
+    document.getElementById("jobDueDateDiv").innerHTML = "<img src=due-date.png id='img'>" + "<div class='px-xs-2'>Job due: </div>" + allInputDataFromLocalStorage[4];
+    document.getElementById("jobCategoryDiv").innerHTML = "<img src=category.png id='img'>" + "<div class='px-xs-2'>Job Category: </div>" + allInputDataFromLocalStorage[5];
+
+    allInputDataFromLocalStorage[6].forEach(function(element, value) {
         if (element === "design"){
             value = 26
         } else if (element === "laser") {
@@ -69,62 +129,25 @@ function submitForm() {
             value = 14;
         } else if (element === "assembly") {
             value = 15;
-        } else {
-            console.log("Nothing selected");
         }
-        return chartData.push(value);
+        chartData.push(value);
+        document.getElementById("newJobFormDiv").style.display = "none";
+        drawChart();
     });
-
-    if (validation()) // Calling validation function
-    {
-        document.getElementById("newJobForm").submit(); //form submission
-        form.jobName = jobName;
-        form.jobId = jobId;
-        form.jobDesigner = jobDesigner;
-        form.jobStartDate = jobStartDate;
-        form.jobDueDate = jobDueDate;
-        form.category = category;
-        form.processList = process;
-        // console.log(form);
-    }
-
-    hideForm();
 }
 
-// Name and Email validation Function.
-function validation() {
-    var startDateValid = 10/20/2019;
-    var jobName = x("jobName");
-    var jobId = x("jobId");
-    var jobDesigner = x("jobDesigner");
-    var jobStartDate = x("jobStartDate");
-    var jobDueDate = x("jobDueDate");
-    var category = x("category");
-    var processList = x("processList");
-    if (jobName === '' || jobId === '' || jobDesigner === '' || jobStartDate <= startDateValid || category === '' || processList === '') {
-        alert("Please fill all fields...!!!!!!");
-        return false;
-    }  else {
-        return true;
-    }
-}
-
-//define the chart package
 google.charts.load('current', {'packages':['corechart']});
 
-//submit requires text inputs to use parseInt to work as numbers
-function drawChart() {
-    var inputValues = JSON.parse(localStorage.getItem("chartData"));
-
+function drawChart(){
     //replace data with variable names
     var data = google.visualization.arrayToDataTable([
         ['Task', 'Hours per Week'],
-        ['Design',     inputValues[0]],
-        ['Laser',      inputValues[1]],
-        ['Bend',  inputValues[2]],
-        ['Weld', inputValues[3]],
-        ['Metal Finish',    inputValues[4]],
-        ['Assembly',    inputValues[5]]
+        ['Design',     chartData[0]],
+        ['Laser',      chartData[1]],
+        ['Bend',  chartData[2]],
+        ['Weld', chartData[3]],
+        ['Metal Finish',    chartData[4]],
+        ['Assembly',    chartData[5]]
     ]);
     var options = {
         hAxis: {
@@ -138,7 +161,7 @@ function drawChart() {
             baselineColor: 'transparent'
         },
         legend: {position: 'top', alignment: 'center', textStyle: {color:'#607d8b', fontName: 'Roboto', fontSize: '9'}},
-        colors: ["#3f51b5","#2196f3","#03a9f4","#00bcd4","#009688","#4caf50","#8bc34a","#cddc39"],
+        colors: ["#60b502","#f301f3","#f40f0a","#00bcd4","#009688","#0010af","#c38c64","#cddc39"],
         areaOpacity: 0.24,
         lineWidth: 1,
         backgroundColor: 'transparent',
@@ -158,9 +181,8 @@ function drawChart() {
         datalessRegionColor: '#37474f',
         displayMode: 'regions'
     };
-    //the id is the DOM location to draw the chart
+//the id is the DOM location to draw the chart
     var chart = new google.visualization.PieChart(document.getElementById('pieChart'));
     chart.draw(data, options);
+
 }
-
-
